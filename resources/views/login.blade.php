@@ -1,22 +1,24 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
 </head>
+
 <body>
     <div>
-        <h4>Username</h4>
-        <input type="text" name="Username">
-        <br><br>
-        <h4>Email</h4>
-        <input type="text" name="Email">
-        <br><br>
-        <h4>Password</h4>
-        <input type="password" name="Password">
-
-        <button type="Login">Login</button>
-        <a href="/register">Don't have an account? Register here.</a>
+      <h4>Username</h4>
+      <input type="text" name="Username">
+      <br><br>
+      <h4>Email</h4>
+      <input type="text" name="Email">
+      <br><br>
+      <h4>Password</h4>
+      <input type="password" name="Password">
+      <button type="Login">Login</button>
+      <a href="/register">Don't have an account? Register here.</a>
 </body>
+
 </html>
