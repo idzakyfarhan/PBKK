@@ -15,7 +15,10 @@
       var value = input.value;
       var ol = document.getElementById("myList");
       var li = document.createElement("li");
-      li.appendChild(document.createTextNode(value));
+      var p = document.createElement("p")
+      li.classList.add("flex", "justify-between", "my-2")
+      p.appendChild(document.createTextNode(value))
+      li.appendChild(p);
       
       var deleteButton = document.createElement("button");
       deleteButton.classList.add("text-red-500", "font-bold", "opacity-0", "hover:opacity-100");
@@ -30,7 +33,7 @@
     }
     
     function toggleStrikethrough(event) {
-      if (event.target.tagName === "LI") {
+      if (event.target.tagName === "P") {
         event.target.classList.toggle("strikethrough");
       }
     }
