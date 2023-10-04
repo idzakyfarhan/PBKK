@@ -19,7 +19,7 @@
       li.classList.add("flex", "justify-between", "my-2")
       p.appendChild(document.createTextNode(value))
       li.appendChild(p);
-      
+
       var deleteButton = document.createElement("button");
       deleteButton.classList.add("text-red-500", "font-bold", "opacity-0", "hover:opacity-100");
       deleteButton.appendChild(document.createTextNode("Delete"));
@@ -27,11 +27,11 @@
         ol.removeChild(li);
       };
       li.appendChild(deleteButton);
-      
+
       ol.appendChild(li);
       input.value = "";
     }
-    
+
     function toggleStrikethrough(event) {
       if (event.target.tagName === "P") {
         event.target.classList.toggle("strikethrough");
@@ -48,6 +48,7 @@
       <ol id="myList" class="list-disc" onclick="toggleStrikethrough(event)"></ol>
       <input type="text" id="myInput" class="w-full px-2 py-4 rounded-md border-blue-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Type your text here">
       <button onclick="addToOrderedList()">Submit</button>
+  </div>
   </div>
 </body>
 </html>
