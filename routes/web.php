@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('todo-store/', [TodoController::class, 'store'])->name('todo-store');
+Route::post('/store', [TodoController::class, 'store'])->name('store');
 
 Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

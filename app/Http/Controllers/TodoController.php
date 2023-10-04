@@ -26,9 +26,13 @@ class TodoController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $todo = new Todo();
-        $todo->name = $request->input('name');
-        $todo->save();
+        // $todo = new Todo();
+        // $todo->name = $request->input('name');
+        // $todo->save();
+
+        $input = $request->all();
+
+        Todo::create($input);
 
         return redirect('/');
     }
