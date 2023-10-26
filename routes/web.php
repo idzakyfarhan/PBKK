@@ -32,4 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
 });
 
+Route::get('/profileedit',function() {
+    return view('profileedit');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 require __DIR__.'/auth.php';
