@@ -36,4 +36,8 @@ Route::get('/profileedit',function() {
     return view('profileedit');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/twitterhome', function () {
+    return view('twitterhome');
+});
+
 require __DIR__.'/auth.php';
