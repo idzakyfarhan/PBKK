@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter-like Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    @vite('resources/css/app.css')
     <style>
-        /* Override Tailwind classes for the purpose of this example */
         .tweet-card {
             border-color: #1da1f2;
         }
@@ -14,14 +13,12 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <div class="flex">
-        <!-- Sidebar -->
-        <div class="w-1/6 bg-white h-screen border-r border-gray-200">
+        <div class="w-1/6 bg-white h-screen border-r border-gray-200 overflow-hidden">
             <div class="p-4">
-                <!-- Profile Section -->
                 <div class="mb-4 text-center">
                     <img src="https://via.placeholder.com/80" class="mx-auto rounded-full mb-2" alt="Profile Picture" width="80" height="80">
-                    <h2 class="text-sm font-semibold">Dzaky Farhan</h2>
-                    <p class="text-xs text-gray-600">@dzakyyfr</p>
+                    <h2 class="text-sm font-semibold">{{ Auth::user()->name }}</h2>
+                    <p class="text-xs text-gray-600">{{ Auth::user()->email }}</p>
                     <div class="mt-2">
                         <p class="text-xs text-gray-600">Following: 100</p>
                         <p class="text-xs text-gray-600">Followers: 500</p>
@@ -30,18 +27,31 @@
 
                 <div class="text-center ">
                     <ul>
-                        <li class="text-sm mb-2"><a href="#" class="text-blue-500 hover:underline">Home</a></li>
-                        <li class="text-sm mb-2"><a href="#" class="text-blue-500 hover:underline">Bookmarks</a></li>
-                        <li class="text-sm mb-2"><a href="#" class="text-blue-500 hover:underline">Profile</a></li>
+                        <li class="text-sm text-black mb-2 hover:bg-[#2AA9E0] hover:text-white rounded-lg w-full p-4 flex justify-start gap-3">
+                            <img src="/icon/home.svg" width="15" alt=""/>
+                            <p href="#" class="font-bold">Home</p>
+                        </li>
+                        <li class="text-sm text-black mb-2 hover:bg-[#2AA9E0] hover:text-white rounded-lg w-full p-4 flex justify-start gap-3">
+                            <img src="/icon/bookmark.svg" width="15" alt=""/>
+                            <p href="#" class="font-bold">Bookmarks</p>
+                        </li>
+                        <li class="text-sm text-black mb-2 hover:bg-[#2AA9E0] hover:text-white rounded-lg w-full p-4 flex justify-start gap-3">
+                            <img src="/icon/user.svg" width="15" alt=""/>
+                            <p href="#" class="font-bold">Profile</p>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="absolute bottom-0 h-16 w-16 ml-16">
-                <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                    Logout
-                </button>
+            <div class="flex flex-col gap-3 px-4">
+                <form method="POST" action="{{ route('logout') }}" class="border-2 border-[#555A64] text-center w-[100%] rounded-md overflow-hidden">
+                    @csrf
+                    <x-dropdown-link :textColor="'#555A64'" :bgColor="'#FFFFFF'" :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-dropdown-link>
+                </form>
             </div>
-
         </div>
 
         <!-- Main Content Area -->
