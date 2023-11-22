@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Model
+class Comments extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name', 'is_done'
+        'comment',
+        'post_id',
+        'user_id',
     ];
 }

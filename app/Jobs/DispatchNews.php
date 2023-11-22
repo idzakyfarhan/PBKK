@@ -33,15 +33,20 @@ class DispatchNews implements ShouldQueue
 
             if ($response->successful()) {
                 $bodyJson = $response->json();
+                // DB::table('news')->insert($bodyJson['articles']);
+                $selectedFields = array_map(function ($article) {
+                    return [
+                        'author' => $article['author'],
+                        'title' => $article['title'],
+                        'description' => $article['description'],
+                    ];
+                }, $bodyJson['articles']);
 
-                // Assuming 'news' table has 'title', 'description', 'url', 'publishedAt', 'content' columns
-                DB::table('news')->insert($bodyJson['articles']);
+                DB::table('news')->insert($selectedFields);
             } else {
-                // Log or handle the error as needed
                 logger()->error('Failed to fetch news articles. HTTP status: ' . $response->status());
             }
         } catch (\Exception $e) {
-            // Log or handle exceptions
             logger()->error('Exception occurred: ' . $e->getMessage());
         }
     }
