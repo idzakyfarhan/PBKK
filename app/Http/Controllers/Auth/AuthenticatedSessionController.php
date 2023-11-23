@@ -29,9 +29,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // ADD CUSTOM
-        $request->session()->put('user_email', $request->input('email'));
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

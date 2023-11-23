@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('message_post');
             $table->integer('like_post')->nullable();
-            $table->integer('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

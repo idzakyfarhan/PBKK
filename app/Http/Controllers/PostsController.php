@@ -7,24 +7,35 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Events\PostCreated;
+use App\Events\PostUpdated;
 
 class PostsController extends Controller
 {
-    public $user_id;
 
-    public function __construct()
+    public function store(Request $request)
     {
-        // $this->user_id = User::get("id");
-        // $this->user_id = DB::table('users')->value('id');
+        $incomingFields = $request->validate([
+            'message_post' => ['required'],
+        ]);
+        $incomingFields['like_post'] = 0;
+        $incomingFields['user_id'] = auth()->id();
+
+        $post = Posts::create($incomingFields);
+
+        event(new PostCreated($post));
+        session()->flash('notification', 'Post created successfully!');
+
+        return back();
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // return "<h1>{$this->user_id}</h1>";
-        $sessionData = Session::get('user_email');
-        return dd($sessionData);
+        $posts = Posts::latest()->get();
+        return view('twitterhome', compact('posts'));
     }
 
     /**
@@ -38,10 +49,6 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -62,9 +69,21 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, Posts $post)
     {
-        //
+        $incomingFields = $request->validate([
+            'message_post' => ['required'],
+        ]);
+
+        $post->update($incomingFields);
+
+        // Dispatch the PostUpdated event
+        event(new PostUpdated($post));
+
+        // Add a success notification
+        session()->flash('notification', 'Post updated successfully!');
+
+        return back();
     }
 
     /**

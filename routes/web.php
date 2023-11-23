@@ -29,16 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
-    Route::get('/news', GetNews::class);
-    Route::get('/lihat-sesi', function () {
-        dd(session()->all());
-    });
-    Route::get('/users', [PostsController::class, 'index']);
+    Route::post('/posts', [PostsController::class, 'store'])->name('posts');
+    Route::get('/home', [PostsController::class, 'index']);
+
+    // Checking
+    Route::get('/check-session', [PostsController::class, 'index']);
 });
 
-Route::get('/twitterhome', function () {
-    return view('twitterhome');
-});
 
 Route::get('/profiletweet', function () {
     return view('profiletweet');
