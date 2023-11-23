@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GetNews;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::post('/store', [TodoController::class, 'store'])->name('store');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -36,6 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
     Route::get('/news', GetNews::class);
+    Route::get('/lihat-sesi', function () {
+        dd(session()->all());
+    });
+    Route::get('/users', [PostsController::class, 'index']);
 });
 
 Route::get('/profileedit',function() {
