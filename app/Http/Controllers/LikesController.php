@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Likes;
+use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
+use App\Models\Posts;
+use App\Models\Likes;
 
 class LikesController extends Controller
 {
@@ -28,10 +30,15 @@ class LikesController extends Controller
      */
     public function store($id)
     {
-        $incomingFields['user_id'] = auth()->id();
+        $userId = auth()->id();
+        $incomingFields['user_id'] = $userId;
         $incomingFields['post_id'] = $id;
 
-        $likes = Likes::create($incomingFields);
+        Likes::create($incomingFields);
+        $post = Posts::findOrFail($id);
+
+        $postsController = new PostsController();
+        $postsController->updateLikesCount($post);
 
         return back();
     }
