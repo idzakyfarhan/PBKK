@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TodoController;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
     Route::post('/posts', [PostsController::class, 'store'])->name('posts');
     Route::get('/home', [PostsController::class, 'index']);
+    Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
+
 
     // Checking
     Route::get('/check-session', [PostsController::class, 'index']);

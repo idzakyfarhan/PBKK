@@ -26,9 +26,14 @@ class LikesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $incomingFields['user_id'] = auth()->id();
+        $incomingFields['post_id'] = $id;
+
+        $likes = Likes::create($incomingFields);
+
+        return back();
     }
 
     /**

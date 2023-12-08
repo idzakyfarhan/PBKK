@@ -34,8 +34,27 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::latest()->get();
-        return view('twitterhome', compact('posts'));
+        // $posts = Posts::latest()->get();
+        $posts = Posts::with('user')->latest()->get();
+        return view('home', compact('posts'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Posts $post)
+    {
+        $incomingFields = $request->validate([
+            'message_post' => ['required'],
+        ]);
+
+        $post->update($incomingFields);
+
+        event(new PostUpdated($post));
+
+        session()->flash('notification', 'Post updated successfully!');
+
+        return back();
     }
 
     /**
@@ -64,26 +83,6 @@ class PostsController extends Controller
     public function edit(Posts $posts)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Posts $post)
-    {
-        $incomingFields = $request->validate([
-            'message_post' => ['required'],
-        ]);
-
-        $post->update($incomingFields);
-
-        // Dispatch the PostUpdated event
-        event(new PostUpdated($post));
-
-        // Add a success notification
-        session()->flash('notification', 'Post updated successfully!');
-
-        return back();
     }
 
     /**
