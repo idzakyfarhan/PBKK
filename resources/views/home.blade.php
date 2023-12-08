@@ -20,7 +20,7 @@
                 <p class="text-gray-600 mt-2 mr-2">{{ $post->like_post }}</p>
                 <form method="POST" >
                     <button onclick="">
-                        <img class="mt-2" src="/icon/like.svg" width="15" alt=""/>
+                        <img class="mt-3.5" src="/icon/like.svg" width="15" alt=""/>
                     </button>
                 </form>
             </div>

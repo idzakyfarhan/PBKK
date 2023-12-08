@@ -40,8 +40,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/profiletweet', function () {
-    return view('profiletweet');
+Route::get('/profile', function () {
+    return view('profile');
+});
+
+Route::get('/news', function () {
+    return view('news');
 });
 
 require __DIR__.'/auth.php';
