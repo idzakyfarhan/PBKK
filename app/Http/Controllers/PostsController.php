@@ -3,32 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Posts;
-use App\Models\User;
+use App\Models\Likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use App\Events\PostCreated;
 use App\Events\PostUpdated;
 
 class PostsController extends Controller
 {
-
-    public function store(Request $request)
-    {
-        $incomingFields = $request->validate([
-            'message_post' => ['required'],
-        ]);
-        $incomingFields['like_post'] = 0;
-        $incomingFields['user_id'] = auth()->id();
-
-        $post = Posts::create($incomingFields);
-
-        event(new PostCreated($post));
-        session()->flash('notification', 'Post created successfully!');
-
-        return back();
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -68,6 +50,21 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function store(Request $request)
+    {
+        $incomingFields = $request->validate([
+            'message_post' => ['required'],
+        ]);
+        $incomingFields['like_post'] = 0;
+        $incomingFields['user_id'] = auth()->id();
+
+        $post = Posts::create($incomingFields);
+
+        event(new PostCreated($post));
+        session()->flash('notification', 'Post created successfully!');
+
+        return back();
+    }
 
     /**
      * Display the specified resource.
@@ -91,5 +88,13 @@ class PostsController extends Controller
     public function destroy(Posts $posts)
     {
         //
+    }
+
+    public function updateLikesCount(Posts $post)
+    {
+        $likesCount = Likes::where('post_id', $post->id)->count();
+        $post->update(['like_post' => $likesCount]);
+
+        return back()->with('notification', 'Likes count updated successfully!');
     }
 }

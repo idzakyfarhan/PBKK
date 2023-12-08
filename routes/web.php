@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [PostsController::class, 'index']);
     Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
 
-
     // Checking
     Route::get('/check-session', [PostsController::class, 'index']);
 });

@@ -18,9 +18,10 @@
             <p class="text-gray-600">{{ $post->message_post }}</p>
             <div class="flex">
                 <p class="text-gray-600 mt-2 mr-2">{{ $post->like_post }}</p>
-                <form method="POST" >
-                    <button onclick="">
-                        <img class="mt-3.5" src="/icon/like.svg" width="15" alt=""/>
+                <form method="POST" action="{{ route('like.post', $post->id) }}">
+                    @csrf
+                    <button type="submit">
+                        <img class="mt-2" src="/icon/like.svg" width="15" alt=""/>
                     </button>
                 </form>
             </div>
