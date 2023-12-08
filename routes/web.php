@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/store', [TodoController::class, 'store'])->name('store');
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -30,11 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
+    Route::post('/posts', [PostsController::class, 'store'])->name('posts');
+    Route::get('/home', [PostsController::class, 'index']);
+    Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
+
+
+    // Checking
+    Route::get('/check-session', [PostsController::class, 'index']);
 });
 
-Route::get('/twitterhome', function () {
-    return view('twitterhome');
-});
 
 Route::get('/profiletweet', function () {
     return view('profiletweet');
