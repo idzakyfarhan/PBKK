@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Http;
 
 class GetNews extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
     public function __invoke(Request $request)
     {
         DispatchNews::dispatch();
