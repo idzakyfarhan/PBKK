@@ -22,14 +22,18 @@ class LikesController extends Controller
     public function store($id)
     {
         $userId = auth()->id();
-        $incomingFields['user_id'] = $userId;
-        $incomingFields['post_id'] = $id;
-
-        Likes::create($incomingFields);
         $post = Posts::findOrFail($id);
 
-        $postsController = new PostsController();
-        $postsController->updateLikesCount($post);
+        // Check if the user has already liked the post
+        if (!$post->likes()->where('user_id', $userId)->exists()) {
+            $incomingFields['user_id'] = $userId;
+            $incomingFields['post_id'] = $id;
+
+            Likes::create($incomingFields);
+
+            $postsController = new PostsController();
+            $postsController->updateLikesCount($post);
+        }
 
         return back();
     }

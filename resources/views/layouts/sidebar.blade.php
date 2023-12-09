@@ -1,14 +1,10 @@
-<div class="w-1/6 bg-white h-screen border-r border-gray-200 overflow-hidden sticky left-0 top-0 bottom-0">
+<div class="bg-white h-screen border-r border-gray-200 overflow-hidden sticky left-0 top-0 bottom-0">
     <div class="p-4">
         <div class="mb-4 text-center">
             <img src="https://via.placeholder.com/80" class="mx-auto rounded-full mb-2" alt="Profile Picture" width="80"
                 height="80">
             <h2 class="text-sm font-semibold">{{ Auth::user()->name }}</h2>
             <p class="text-xs text-gray-600">{{ Auth::user()->email }}</p>
-            <div class="mt-2">
-                <p class="text-xs text-gray-600">Following: 100</p>
-                <p class="text-xs text-gray-600">Followers: 500</p>
-            </div>
         </div>
 
         <div class="text-center">
