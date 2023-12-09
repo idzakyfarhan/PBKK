@@ -4,6 +4,8 @@ use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\BookmarksController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,20 +28,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', [PostsController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/bookmarks', [BookmarksController::class, 'index']);
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
     Route::post('/posts', [PostsController::class, 'store'])->name('posts');
-    Route::get('/home', [PostsController::class, 'index']);
     Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
+    Route::post('/bookmark-post/{id}', [BookmarksController::class, 'store'])->name('bookmark.post');
+    Route::get('/news', [NewsController::class, 'index']);
 
     // Checking
     Route::get('/check-session', [PostsController::class, 'index']);
 });
 
-Route::get('/news', function () {
-    return view('news');
-});
 
 require __DIR__.'/auth.php';

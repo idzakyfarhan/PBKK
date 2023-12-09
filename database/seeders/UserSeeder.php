@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'admin2',
             'email' => 'admin222abc@gmail.com',
-            'password' => 'Admin111abc!?'
+            'password' => 'Admin222abc!?'
         ]);
     }
 }

@@ -31,16 +31,16 @@
                     </form>
                     <form method="POST">
                         <div class="flex gap-1.5 items-center">
-                            <p class="text-gray-600 ">2</p>
+                            <p class="text-gray-600 ">{{ $post->comment_post }}</p>
                             @csrf
                             <button type="submit">
                                 <img class="" src="/icon/comment.svg" width="15" alt="" />
                             </button>
                         </div>
                     </form>
-                    <form method="POST">
+                    <form method="POST" action="{{ route('bookmark.post', $post->id) }}">
                         <div class="flex gap-1.5 items-center">
-                            <p class="text-gray-600 ">2</p>
+                            <p class="text-gray-600 ">{{ $post->bookmark_post }}</p>
                             @csrf
                             <button type="submit">
                                 <img class="" src="/icon/bookmark.svg" width="15" alt="" />

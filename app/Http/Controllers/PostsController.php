@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use App\Models\Likes;
+use App\Models\Bookmarks;
 use Illuminate\Http\Request;
 use App\Events\PostCreated;
 use App\Events\PostUpdated;
@@ -42,6 +43,7 @@ class PostsController extends Controller
             'message_post' => ['required'],
         ]);
         $incomingFields['like_post'] = 0;
+        $incomingFields['bookmark_post'] = 0;
         $incomingFields['user_id'] = auth()->id();
 
         $post = Posts::create($incomingFields);
@@ -72,6 +74,14 @@ class PostsController extends Controller
         $likesCount = Likes::where('post_id', $post->id)->count();
         $post->update(['like_post' => $likesCount]);
 
-        return back()->with('notification', 'Likes count updated successfully!');
+        return back()->with('notification', 'Likes updated successfully!');
+    }
+
+    public function updateBookmarksCount(Posts $post)
+    {
+        $bookmarksCount = Bookmarks::where('post_id', $post->id)->count();
+        $post->update(['bookmark_post' => $bookmarksCount]);
+
+        return back()->with('notification', 'Bookmarks updated successfully!');
     }
 }
