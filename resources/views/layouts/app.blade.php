@@ -23,7 +23,7 @@
         <div class="w-2/5 border-x border-gray-200 overflow-hidden">
             @yield('content')
         </div>
-        <div class="w-1/5"></div>
+        <div class="w-1/5 bg-white"></div>
     </div>
 </body>
 

@@ -1,4 +1,4 @@
-<div class="bg-white h-screen border-r border-gray-200 overflow-hidden sticky left-0 top-0 bottom-0">
+<div class="bg-white h-screen overflow-hidden sticky left-0 top-0 bottom-0">
     <div class="p-4">
         <div class="mb-4 text-center">
             <img src="https://via.placeholder.com/80" class="mx-auto rounded-full mb-2" alt="Profile Picture" width="80"

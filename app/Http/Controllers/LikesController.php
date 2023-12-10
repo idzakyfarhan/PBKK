@@ -24,7 +24,6 @@ class LikesController extends Controller
         $userId = auth()->id();
         $post = Posts::findOrFail($id);
 
-        // Check if the user has already liked the post
         if (!$post->likes()->where('user_id', $userId)->exists()) {
             $incomingFields['user_id'] = $userId;
             $incomingFields['post_id'] = $id;
