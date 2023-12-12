@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
 use App\Models\Posts;
@@ -15,9 +16,13 @@ class BookmarksController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $bookmarkedPosts = $user->bookmarks()->with('post')->get();
+        $userId = auth()->id();
 
-        return view('bookmarks', compact('bookmarkedPosts'));
+        $bookmarkedPosts = $user->bookmarks()->where('user_id', $userId)->get();
+        $postIds = $bookmarkedPosts->pluck('post_id');
+        $posts = Posts::whereIn('id', $postIds)->get();
+
+        return view('bookmarks', compact('posts'));
     }
 
     /**
@@ -41,10 +46,14 @@ class BookmarksController extends Controller
             $incomingFields['post_id'] = $id;
 
             Bookmarks::create($incomingFields);
-
-            $postsController = new PostsController();
-            $postsController->updateBookmarksCount($post);
+        } else {
+            $post->bookmarks()->where('user_id', $userId)->delete();
         }
+
+        $postsController = new PostsController();
+        $postsController->updateBookmarksCount($post);
+
+        session()->flash('notification', 'You Bookmark a Post!');
 
         return back();
     }

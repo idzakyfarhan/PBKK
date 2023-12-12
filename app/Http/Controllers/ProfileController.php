@@ -15,13 +15,13 @@ class ProfileController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
+        $user = auth()->user();
         $posts = Posts::with('user')
             ->where('user_id', $userId)
             ->latest()
             ->get();
 
-        return view('profile', compact('posts'));
+        return view('profile', compact('posts'))->with('user', $user);
     }
 
     public function edit(Request $request): View

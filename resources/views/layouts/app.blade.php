@@ -41,6 +41,7 @@
         <div class="w-1/5 bg-white"></div>
         <div class="w-1/5">
             @include('layouts.sidebar')
+            {{-- @include('layouts.navigation') --}}
         </div>
         <div class="w-2/5 border-x border-gray-200 overflow-hidden">
             @yield('content')
