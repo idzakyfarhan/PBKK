@@ -3,7 +3,6 @@
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\TodoController;
 use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -31,13 +30,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [PostsController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::get('/bookmarks', [BookmarksController::class, 'index']);
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
+    Route::get('/news', [NewsController::class, 'index']);
+
     Route::post('/posts', [PostsController::class, 'store'])->name('posts');
     Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
     Route::post('/bookmark-post/{id}', [BookmarksController::class, 'store'])->name('bookmark.post');
-    Route::get('/news', [NewsController::class, 'index']);
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Checking
     Route::get('/check-session', [PostsController::class, 'index']);

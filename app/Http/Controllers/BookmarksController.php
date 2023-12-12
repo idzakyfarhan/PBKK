@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\PostsController;
-
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Bookmarks;
+use Illuminate\Support\Facades\Auth;
 
 class BookmarksController extends Controller
 {
@@ -14,8 +14,10 @@ class BookmarksController extends Controller
      */
     public function index()
     {
-        $posts = Posts::with('user')->latest()->get();
-        return view('bookmarks', compact('posts'));
+        $user = Auth::user();
+        // $bookmarkedPosts = $user->bookmarks()->with('post')->get();
+
+        return view('bookmarks', compact('bookmarkedPosts'));
     }
 
     /**

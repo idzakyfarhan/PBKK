@@ -17,4 +17,9 @@ class Bookmarks extends Model
     {
         return $this->belongsTo(Posts::class, 'post_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

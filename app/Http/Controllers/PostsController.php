@@ -43,6 +43,7 @@ class PostsController extends Controller
             'message_post' => ['required'],
         ]);
         $incomingFields['like_post'] = 0;
+        $incomingFields['comment_post'] = 0;
         $incomingFields['bookmark_post'] = 0;
         $incomingFields['user_id'] = auth()->id();
 
@@ -64,9 +65,20 @@ class PostsController extends Controller
         //
     }
 
-    public function destroy(Posts $posts)
+    public function destroy($id)
     {
-        //
+        $post = Posts::find($id);
+        if(auth()->user()->id !== $post->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $post->likes()->delete();
+        $post->bookmarks()->delete();
+        $post->delete();
+
+        session()->flash('notification', 'Post deleted successfully!');
+
+        return back();
     }
 
     public function updateLikesCount(Posts $post)
