@@ -30,15 +30,15 @@
                             </button>
                         </div>
                     </form>
-                    <form method="POST">
+                    <!-- <form method="POST"> -->
                         <div class="flex gap-1.5 items-center">
                             <p class="text-gray-600 ">{{ $post->comment_post }}</p>
-                            @csrf
-                            <button type="submit">
+                            <!-- @csrf -->
+                            <button type="submit" onclick="modal_comments.showModal()">
                                 <img class="" src="/icon/comment.svg" width="15" alt="" />
                             </button>
                         </div>
-                    </form>
+                    <!-- </form> -->
                     <form method="POST" action="{{ route('bookmark.post', $post->id) }}">
                         <div class="flex gap-1.5 items-center">
                             <p class="text-gray-600 ">{{ $post->bookmark_post }}</p>
