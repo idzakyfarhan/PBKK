@@ -22,7 +22,7 @@ class BookmarksController extends Controller
         $postIds = $bookmarkedPosts->pluck('post_id');
         $posts = Posts::whereIn('id', $postIds)->get();
 
-        return view('bookmarks', compact('posts'));
+        return view('bookmarks', compact('posts'))->with('user', $user);
     }
 
     /**
