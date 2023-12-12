@@ -45,7 +45,7 @@
 
     <div class="px-4 absolute bottom-0 mb-10 w-full flex flex-col gap-2">
         <button
-            class="btn hover:text-white hover:bg-blue-600 text-grey-600 hover:ring-blue-600 text-sm rounded-md w-full px-4 py-3 flex justify-start gap-3 ring-2 ring-[#555a64] ring-inset"
+            class="btn hover:text-white hover:bg-blue-300 text-grey-600 hover:ring-blue-400 text-sm rounded-md w-full px-4 py-3 flex justify-start gap-3 ring-2 ring-[#555a64] ring-inset"
             onclick="my_modal_4.showModal()">
             Edit Profile
         </button>
@@ -61,55 +61,23 @@
         </form>
     </div>
 
-    <dialog id="my_modal_4" class="modal">
-        <div class="modal-box flex justify-end mt-2 mr-2">
-            <button class="text-gray-600 hover:text-black focus:outline-none" onclick="my_modal_4.close()">X</button>
-        </div>
-        <div class="modal-box flex justify-center mt-20 px-10">
-
-            <form class="max-w-2xl bg-white p-8 rounded-lg">
-                <div class="p-4">
-                    <div class="mb-4 text-center">
-                        <img src="https://via.placeholder.com/80" class="mx-auto rounded-full mb-2"
-                            alt="Profile Picture" width="100" height="100">
-                        <h2 class="text-xl font-semibold">{{ Auth::user()->name }}</h2>
-                        <p class="text-sm text-gray-600">{{ Auth::user()->email }}</p>
-                        <div class="mt-2">
-                            <p class="text-sm text-gray-600">Following: 100</p>
-                            <p class="text-sm text-gray-600">Followers: 500</p>
-                        </div>
-                    </div>
-                </div>
+    <dialog id="my_modal_4" class="modal rounded-lg">
+        <div class="flex flex-col justify-center relative bg-blue-300">
+            <button class="bg-blue-300 hover:bg-blue-400 font-medium italic text-white"
+                onclick="my_modal_4.close()">close</button>
+            <div class="max-w-2xl bg-white p-8 rounded-t-lg">
                 <div class="space-y-4">
                     <div class="w-full">
-                        <label class="text-gray-600 dark:text-gray-400">Change User Name</label>
-                        <input
-                            class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-slate-500
-                                            focus:ring focus:ring-slate-500"
-                            type="text">
+                        @include('profile.partials.update-profile-information-form')
                     </div>
                     <div class="w-full">
-                        <label class="text-gray-600 dark:text-gray-400">Email</label>
-                        <input
-                            class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-slate-500
-                                            focus:ring focus:ring-slate-500"
-                            type="text">
+                        @include('profile.partials.update-password-form')
                     </div>
                     <div class="w-full">
-                        <label class="text-gray-600 dark:text-gray-400">Bio</label>
-                        <textarea
-                            class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-slate-500
-                                            focus:ring focus:ring-slate-500"
-                            name="bio"></textarea>
-                    </div>
-                    <div class="flex mr-2 justify-end">
-                        <button
-                            class="px-6 py-3 text-white bg-blue-700 rounded-md hover:bg-blue-500
-                                            focus:outline-none focus:ring focus:ring-violet-500"
-                            type="submit">Save Changes</button>
+                        @include('profile.partials.delete-user-form')
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </dialog>
 </div>

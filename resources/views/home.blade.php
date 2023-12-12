@@ -17,8 +17,9 @@
     <div class="p-4">
         @foreach ($posts as $post)
             <div class="tweet-card border rounded-lg p-4 bg-white mb-4">
-                <h2 class="font-bold mb-3">{{ $post->user->name }}</h2>
-                <p class="text-gray-600">{{ $post->message_post }}</p>
+                <h2 class="font-bold">{{ $post->user->name }}</h2>
+                <span class="font-light italic text-gray-500 text-xs -top-1 relative">{{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
+                <p class="text-gray-600 my-3">{{ $post->message_post }}</p>
                 <div class="flex flex-row justify-around w-full gap-5 mt-2">
                     <form method="POST" action="{{ route('like.post', $post->id) }}">
                         <div class="flex gap-1 items-center">
