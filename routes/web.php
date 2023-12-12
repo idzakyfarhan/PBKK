@@ -28,6 +28,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [PostsController::class, 'index']);
+    Route::get('/comments', function () {
+        $user = Auth::user();
+        return view('comments')->with('user', $user);
+    });    
     Route::get('/bookmarks', [BookmarksController::class, 'index']);
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);

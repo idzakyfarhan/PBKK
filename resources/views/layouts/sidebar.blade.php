@@ -46,7 +46,7 @@
     <div class="px-4 absolute bottom-0 mb-10 w-full flex flex-col gap-2">
         <button
             class="btn hover:text-white hover:bg-blue-300 text-grey-600 hover:ring-blue-400 text-sm rounded-md w-full px-4 py-3 flex justify-start gap-3 ring-2 ring-[#555a64] ring-inset"
-            onclick="my_modal_4.showModal()">
+            onclick="modal_editprofile.showModal()">
             Edit Profile
         </button>
 
@@ -61,10 +61,10 @@
         </form>
     </div>
 
-    <dialog id="my_modal_4" class="modal rounded-lg">
+    <dialog id="modal_editprofile" class="modal rounded-lg">
         <div class="flex flex-col justify-center relative bg-blue-300">
             <button class="bg-blue-300 hover:bg-blue-400 font-medium italic text-white"
-                onclick="my_modal_4.close()">close</button>
+                onclick="modal_editprofile.close()">close</button>
             <div class="max-w-2xl bg-white p-8 rounded-t-lg">
                 <div class="space-y-4">
                     <div class="w-full">
@@ -80,4 +80,5 @@
             </div>
         </div>
     </dialog>
+    
 </div>

@@ -48,6 +48,25 @@
         </div>
         <div class="w-1/5 bg-white"></div>
     </div>
+    <dialog id="modal_comments" class="modal rounded-lg">
+        <div class="flex flex-col justify-center relative bg-blue-300">
+            <button class="bg-blue-300 hover:bg-blue-400 font-medium italic text-white"
+                onclick="modal_comments.close()">close</button>
+            <div class="max-w-2xl bg-white p-8 rounded-t-lg">
+                <div class="space-y-4">
+                    <div class="w-full">
+                    <div class="tweet-card border rounded-lg p-4 bg-white">
+                        <h2 class="font-bold mb-3">Comments</h2>
+                            <textarea name="message_post" class="border-2 border-blue-300 rounded-lg w-full p-3 resize-none" rows="2"></textarea>
+                            <x-primary-button>
+                                {{ __('Reply') }}
+                            </x-primary-button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
