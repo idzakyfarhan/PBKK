@@ -13,8 +13,9 @@ class PostsController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         $posts = Posts::with('user')->latest()->get();
-        return view('home', compact('posts'));
+        return view('home', compact('posts'))->with('user', $user);
     }
 
     public function update(Request $request, Posts $post)
