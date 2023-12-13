@@ -30,14 +30,14 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [PostsController::class, 'index'])->name('home');
-    Route::get('/ai', function () {
-        $user = Auth::user();
-        return view('chatan')->with('user', $user);
-    });
     Route::get('/bookmarks', [BookmarksController::class, 'index']);
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::get('/comments/{id}', [CommentsController::class, 'index']);
+    Route::get('/ai', function () {
+        $user = Auth::user();
+        return view('chatan')->with('user', $user);
+    });
 
     Route::post('/posts', [PostsController::class, 'store'])->name('posts');
     Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
