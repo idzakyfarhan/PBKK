@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string("author")->nullable();
             $table->string("title")->nullable();
             $table->text("description")->nullable();
-            $table->string("url")->nullable();
+            $table->text("url")->nullable();
             $table->string("urlToImage")->nullable();
             $table->string("publishedAt")->nullable();
             $table->text("content")->nullable();

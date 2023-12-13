@@ -2,21 +2,31 @@
 
 @section('content')
     <h1 class="p-4 mt-2 font-bold text-gray-400 text-2xl">Breaking News</h1>
-    <div class="p-4">
+    <div class="p-4 relative">
+        @foreach ($news as $new)
         <div class="tweet-card border rounded-lg p-4 bg-white mb-4">
-            <h2 class="font-bold mb-3">NEWS NAME</h2>
-            <p class="text-gray-600 mb-2">TWEET STATIC</p>
-            <img class="w-1/2 rounded-lg mb-3" src="https://via.placeholder.com/500x300" alt="Tweet Image">
-            <div class="flex">
+            <h2 class="font-bold">{{ $new->title }}</h2>
+            <a href="{{ $new->url }}" class="text-gray-600 underline">{{ $new->author }}</a>
+            <img class="w-1/2 rounded-lg my-3" src="{{ $new->urlToImage }}" alt="image">
+            <p>{{ $new->description }}</p>
+            <div class="flex flex-row gap-4 border-2 rounded-lg w-fit px-3 py-2">
                 <form method="POST">
-                    <button onclick="" class="flex">
-                        <p class="text-gray-600 mt-3 mr-2">4</p>
-                        <img class="mt-3.5" src="/icon/upvote.svg" width="20" alt="" />
-                        <p class="text-gray-600 mt-3 ml-2">4</p>
-                        <img class="mt-3.5 ml-3" src="/icon/downvote.svg" width="20" alt="" />
+                    <button onclick="" class="flex items-center justify-center gap-1">
+                        <p class="text-gray-600">0</p>
+                        <img src="/icon/upvote.svg" width="20" alt="" />
+                    </button>
+                </form>
+                <form method="POST">
+                    <button onclick="" class="flex items-center justify-center gap-1">
+                        <p class="text-gray-600">0</p>
+                        <img src="/icon/downvote.svg" width="20" alt="" />
                     </button>
                 </form>
             </div>
+        </div>
+        @endforeach
+        <div class="fixed bottom-4 shadow-xl right-[29%]">
+            {{ $news->onEachSide(3)->links('custom-pagination') }}
         </div>
     </div>
 @endsection

@@ -39,6 +39,9 @@ class DispatchNews implements ShouldQueue
                         'author' => $article['author'],
                         'title' => $article['title'],
                         'description' => $article['description'],
+                        'url' => $article['url'],
+                        'urlToImage' => $article['urlToImage'],
+                        'publishedAt' => $article['publishedAt'],
                     ];
                 }, $bodyJson['articles']);
 

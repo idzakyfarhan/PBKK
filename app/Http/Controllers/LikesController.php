@@ -29,21 +29,22 @@ class LikesController extends Controller
             $incomingFields['post_id'] = $id;
 
             Likes::create($incomingFields);
+            $postsController = new PostsController();
+            $postsController->updateLikesCount($post);
+            session()->flash('notification', 'You Like a Post!');
         } else {
             $post->likes()->where('user_id', $userId)->delete();
+            $postsController = new PostsController();
+            $postsController->updateLikesCount($post);
+            session()->flash('alert', 'You Dislike a Post!');
         }
-
-        $postsController = new PostsController();
-        $postsController->updateLikesCount($post);
-
-        session()->flash('notification', 'You Like a Post!');
 
         return back();
     }
 
     public function show(Likes $likes)
     {
-        //
+        dd($likes);
     }
 
     public function edit(Likes $likes)

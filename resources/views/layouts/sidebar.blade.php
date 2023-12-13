@@ -52,7 +52,7 @@
 
     <div class="px-4 absolute bottom-0 mb-10 w-full flex flex-col gap-2">
         <button
-            class="btn hover:text-white hover:bg-blue-300 text-grey-600 hover:ring-blue-400 text-sm rounded-md w-full px-4 py-3 flex justify-start gap-3 ring-2 ring-[#555a64] ring-inset"
+            class="btn hover:text-white hover:bg-[#2AA9E0] text-grey-600 hover:ring-0 text-sm rounded-md w-full px-4 py-3 flex justify-start gap-3 ring-2 ring-[#555a64] ring-inset"
             onclick="modal_editprofile.showModal()">
             Edit Profile
         </button>
@@ -68,11 +68,11 @@
         </form>
     </div>
 
-    <dialog id="modal_editprofile" class="modal rounded-lg">
-        <div class="flex flex-col justify-center relative bg-blue-300">
-            <button class="bg-blue-300 hover:bg-blue-400 font-medium italic text-white"
+    <dialog id="modal_editprofile" class="modal rounded-lg transition">
+        <div class="flex flex-col justify-center relative">
+            <button class="bg-[#2AA9E0] hover:bg-[#317c9c] font-medium italic text-white"
                 onclick="modal_editprofile.close()">close</button>
-            <div class="max-w-2xl bg-white p-8 rounded-t-lg">
+            <div class="max-w-2xl bg-white p-8">
                 <div class="space-y-4">
                     <div class="w-full">
                         @include('profile.partials.update-profile-information-form')
@@ -87,5 +87,5 @@
             </div>
         </div>
     </dialog>
-    
+
 </div>
