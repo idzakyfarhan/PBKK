@@ -5,11 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Model
+class News extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name', 'is_done'
+        'source',
+        'author',
+        'title',
+        'description',
+        'url',
+        'urlToImage',
+        'publishedAt',
+        'content',
     ];
 }
+
