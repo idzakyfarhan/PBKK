@@ -12,13 +12,13 @@
             <div class="flex flex-row gap-4 border-2 rounded-lg w-fit px-3 py-2">
                 <form method="POST">
                     <button onclick="" class="flex items-center justify-center gap-1">
-                        <p class="text-gray-600">4</p>
+                        <p class="text-gray-600">0</p>
                         <img src="/icon/upvote.svg" width="20" alt="" />
                     </button>
                 </form>
                 <form method="POST">
                     <button onclick="" class="flex items-center justify-center gap-1">
-                        <p class="text-gray-600">4</p>
+                        <p class="text-gray-600">0</p>
                         <img src="/icon/downvote.svg" width="20" alt="" />
                     </button>
                 </form>

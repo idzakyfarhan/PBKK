@@ -39,14 +39,12 @@ class LikesController extends Controller
             session()->flash('alert', 'You Dislike a Post!');
         }
 
-
-
         return back();
     }
 
     public function show(Likes $likes)
     {
-        //
+        dd($likes);
     }
 
     public function edit(Likes $likes)

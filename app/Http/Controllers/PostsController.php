@@ -8,16 +8,30 @@ use App\Models\Bookmarks;
 use Illuminate\Http\Request;
 use App\Events\PostCreated;
 use App\Events\PostUpdated;
+use App\Models\Comments;
 
 class PostsController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $posts = Posts::with('user')->latest()->get();
+        $posts = Posts::with('user')->latest();
 
-        return view('home', compact('posts'))->with('user', $user);
+        if (request()->has('search')) {
+            $searchTerm = request()->get('search');
+            $posts->where(function ($query) use ($searchTerm) {
+                $query->where('message_post', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhereHas('user', function ($userQuery) use ($searchTerm) {
+                        $userQuery->where('name', 'LIKE', '%' . $searchTerm . '%');
+                    });
+            });
+        }
+
+        $posts = $posts->get();
+
+        return view('home', compact('posts', 'user'));
     }
+
 
     public function update(Request $request, Posts $post)
     {
@@ -59,7 +73,7 @@ class PostsController extends Controller
 
     public function show(Posts $posts)
     {
-        //
+        dd($posts);
     }
 
     public function edit(Posts $posts)
@@ -70,7 +84,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Posts::find($id);
-        if(auth()->user()->id !== $post->user_id) {
+        if (auth()->user()->id !== $post->user_id) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -96,6 +110,14 @@ class PostsController extends Controller
         $bookmarksCount = Bookmarks::where('post_id', $post->id)->count();
         $post->update(['bookmark_post' => $bookmarksCount]);
 
-        return back()->with('notification', 'Bookmarks updated successfully!');
+        return back();
+    }
+
+    public function updateCommentsCount(Posts $post)
+    {
+        $bookmarksCount = Comments::where('post_id', $post->id)->count();
+        $post->update(['comment_post' => $bookmarksCount]);
+
+        return back();
     }
 }
