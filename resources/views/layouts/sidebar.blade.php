@@ -61,11 +61,11 @@
         </form>
     </div>
 
-    <dialog id="modal_editprofile" class="modal rounded-lg">
-        <div class="flex flex-col justify-center relative bg-blue-300">
+    <dialog id="modal_editprofile" class="modal rounded-lg transition">
+        <div class="flex flex-col justify-center relative">
             <button class="bg-blue-300 hover:bg-blue-400 font-medium italic text-white"
                 onclick="modal_editprofile.close()">close</button>
-            <div class="max-w-2xl bg-white p-8 rounded-t-lg">
+            <div class="max-w-2xl bg-white p-8">
                 <div class="space-y-4">
                     <div class="w-full">
                         @include('profile.partials.update-profile-information-form')
@@ -80,5 +80,5 @@
             </div>
         </div>
     </dialog>
-    
+
 </div>

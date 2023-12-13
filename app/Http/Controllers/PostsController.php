@@ -15,6 +15,7 @@ class PostsController extends Controller
     {
         $user = auth()->user();
         $posts = Posts::with('user')->latest()->get();
+
         return view('home', compact('posts'))->with('user', $user);
     }
 

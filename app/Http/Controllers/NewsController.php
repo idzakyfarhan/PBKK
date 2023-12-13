@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DispatchNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\News;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -12,8 +16,10 @@ class NewsController extends Controller
      */
     public function index()
     {
+        DispatchNews::dispatch();
         $user = Auth::user();
-        return view('news')->with('user', $user);
+        $news = News::paginate(15);
+        return view('news', compact('news', 'user'));
     }
 
     /**
