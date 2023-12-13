@@ -25,7 +25,7 @@
             </div>
         </div>
         @endforeach
-        <div class="fixed bottom-4 shadow-xl right-[29%]">
+        <div class="fixed bottom-4 shadow-xl">
             {{ $news->onEachSide(3)->links('custom-pagination') }}
         </div>
     </div>
