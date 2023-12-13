@@ -31,7 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/comments', function () {
         $user = Auth::user();
         return view('comments')->with('user', $user);
-    });    
+    });
+    Route::get('/ai', function () {
+        $user = Auth::user();
+        return view('chatan')->with('user', $user);
+    });        
     Route::get('/bookmarks', [BookmarksController::class, 'index']);
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
@@ -39,7 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts', [PostsController::class, 'store'])->name('posts');
     Route::post('/like-post/{id}', [LikesController::class, 'store'])->name('like.post');
     Route::post('/bookmark-post/{id}', [BookmarksController::class, 'store'])->name('bookmark.post');
-
+    Route::post('/chat', 'App\Http\Controllers\ChatController');
+    
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
 
