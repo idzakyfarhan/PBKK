@@ -37,6 +37,13 @@
                         <p href="/news" class="font-bold">News</p>
                     </li>
                 </a>
+                <a href="/ai">
+                    <li
+                        class="text-sm text-black mb-2 hover:bg-[#2AA9E0] hover:text-white rounded-lg w-full p-4 flex justify-start gap-3">
+                        <img src="/icon/ai.svg" width="15" alt="" />
+                        <p href="/ai" class="font-bold">Ai</p>
+                    </li>
+                </a>
             </ul>
         </div>
     </div>
