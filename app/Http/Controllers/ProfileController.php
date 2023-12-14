@@ -21,7 +21,7 @@ class ProfileController extends Controller
             ->latest()
             ->get();
 
-        return view('profile', compact('posts'))->with('user', $user);
+        return view('profile', compact('posts', 'user'));
     }
 
     public function edit(Request $request): View

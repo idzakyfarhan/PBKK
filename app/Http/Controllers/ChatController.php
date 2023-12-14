@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Throwable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ChatController extends Controller
 {
@@ -12,11 +13,15 @@ class ChatController extends Controller
      * @param Request $request
      * @return string
      */
-    public function __invoke(Request $request): string
+    public function index()
     {
+        $user = Auth::user();
+        return view('chatan')->with('user', $user);
+    }
 
+    public function store(Request $request)
+    {
         try {
-            /** @var array $response */
             $response = Http::withHeaders([
                 "Content-Type" => "application/json",
                 "Authorization" => "Bearer " . env('CHAT_GPT_KEY')
@@ -35,5 +40,6 @@ class ChatController extends Controller
         } catch (Throwable $e) {
             return "Chat GPT Limit Reached. This means too many people have used this demo this month and hit the FREE limit available. You will need to wait, sorry about that.";
         }
+
     }
 }
